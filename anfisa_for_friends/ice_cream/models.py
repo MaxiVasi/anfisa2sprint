@@ -53,7 +53,7 @@ class IceCream(PublishedModel):
         related_name='ice_creams',
         verbose_name='Категория'
     )
-    toppings = models.ManyToManyField(Topping, verbose_name='топпинги')
+    toppings = models.ManyToManyField(Topping, verbose_name='Топпинги')
     is_on_main = models.BooleanField(default=False, verbose_name='На главную')
     class Meta:
         verbose_name = 'мороженое'
