@@ -4,8 +4,8 @@ from core.models import PublishedModel
 
 
 class Category(PublishedModel):
-    title = models.CharField(verbose_name='Название', max_length=256)
-    slug = models.SlugField(verbose_name='Слаг', max_length=64, unique=True)
+    title = models.CharField(max_length=256, verbose_name='Название')
+    slug = models.SlugField(max_length=64, unique=True, verbose_name='Слаг')
     output_order = models.PositiveSmallIntegerField(
         verbose_name='Порядок отображения',
         default=100
@@ -18,8 +18,8 @@ class Category(PublishedModel):
 
 
 class Topping(PublishedModel):
-    title = models.CharField(verbose_name='Название', max_length=256)
-    slug = models.SlugField(verbose_name='Слаг', max_length=64, unique=True)
+    title = models.CharField(max_length=256, verbose_name='Название')
+    slug = models.SlugField(max_length=64, unique=True, verbose_name='Слаг')
     class Meta:
         verbose_name = 'топпинги'
         verbose_name_plural = 'Топпинги'
@@ -28,7 +28,7 @@ class Topping(PublishedModel):
 
 
 class Wrapper(PublishedModel):
-    title = models.CharField(verbose_name='Название', max_length=256)
+    title = models.CharField(max_length=256, verbose_name='Название')
     class Meta:
         verbose_name = 'обёртки'
         verbose_name_plural = 'Обёртки'
@@ -37,7 +37,7 @@ class Wrapper(PublishedModel):
 
 
 class IceCream(PublishedModel):
-    title = models.CharField(verbose_name='Название', max_length=256)
+    title = models.CharField(max_length=256, verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
     wrapper = models.OneToOneField(
         Wrapper,
@@ -53,8 +53,8 @@ class IceCream(PublishedModel):
         related_name='ice_creams',
         verbose_name='Категория'
     )
-    toppings = models.ManyToManyField(Topping)
-    is_on_main = models.BooleanField(verbose_name='На главную', default=False)
+    toppings = models.ManyToManyField(Topping, verbose_name='топпинги')
+    is_on_main = models.BooleanField(default=False, verbose_name='На главную')
     class Meta:
         verbose_name = 'мороженое'
         verbose_name_plural = 'Мороженое'
