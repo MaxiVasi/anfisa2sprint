@@ -6,10 +6,21 @@ from ice_cream.models import Category, IceCream
 
 def index(request):
     template_name = 'homepage/index.html'
+    ice_cream_list = IceCream.objects.values(
+        'id', 'title', 'price', 'description'
+    ).filter(
+        # Проверяем, что
+        is_published=True,  # Сорт разрешён к публикации;
+        is_on_main=True,  # Сорт разрешён к публикации на главной странице;
+        category__is_published=True  # Категория разрешена к публикации.
+    )
+
+
+
     # ice_cream_list = IceCream.objects.values('id', 'title', 'category__title')
     # ice_cream_list = IceCream.objects.select_related('category')
-    ice_cream_list = IceCream.objects.select_related('wrapper').filter(
-        is_on_main=True, is_published=True).order_by('title')
+    # ice_cream_list = IceCream.objects.select_related('wrapper').filter(
+    #    is_on_main=True, is_published=True).order_by('title')
         
     
     # Запрос:
